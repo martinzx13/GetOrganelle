@@ -1,0 +1,9 @@
+# Example samples file for batch_assembly.py
+# Format: sample_name,path_to_R1,path_to_R2
+#
+# Lines starting with # are ignored
+# Remove the # from the examples below and replace with your actual file paths
+
+# zebrafish_01,data/raw_reads/zebrafish_01_R1.fastq.gz,data/raw_reads/zebrafish_01_R2.fastq.gz
+# zebrafish_02,data/raw_reads/zebrafish_02_R1.fastq.gz,data/raw_reads/zebrafish_02_R2.fastq.gz
+# medaka_01,data/raw_reads/medaka_01_R1.fastq.gz,data/raw_reads/medaka_01_R2.fastq.gz

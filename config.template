@@ -1,0 +1,112 @@
+# GetOrganelle Configuration Template
+# This file contains configuration parameters for GetOrganelle assembly
+
+# Assembly Parameters
+# ===================
+
+# Number of threads/cores to use
+THREADS=4
+
+# K-mer values for assembly (comma-separated)
+# Recommended: 21,45,65,85,105 for standard assemblies
+# For high-coverage: add 115,125
+KMER_VALUES="21,45,65,85,105"
+
+# Number of extension rounds
+# Default: 15
+# Increase for difficult assemblies or low coverage
+EXTENSION_ROUNDS=15
+
+# Organelle type
+# Options: animal_mt, embplant_pt, embplant_mt, fungus_mt, embplant_nr
+ORGANELLE_TYPE="animal_mt"
+
+# Maximum number of reads to use (optional)
+# Format: scientific notation (e.g., 1.5E7 = 15 million reads)
+# Leave empty to use all reads
+MAX_READS=""
+
+# Advanced Options
+# ================
+
+# Pre-group reads (recommended for high-coverage data)
+PRE_GROUPED="true"
+
+# Word size for seed search
+# Default: auto-selected based on k-mer values
+WORD_SIZE=""
+
+# Minimum depth for accepting contigs
+# Default: auto
+MIN_DEPTH=""
+
+# Maximum depth for accepting contigs
+# Default: auto
+MAX_DEPTH=""
+
+# Genetic Code
+# =============
+# For annotation (used with MitoZ)
+# 2 = Vertebrate Mitochondrial Code (most fish)
+# 5 = Invertebrate Mitochondrial Code
+GENETIC_CODE=2
+
+# Taxonomic Clade (for annotation)
+# Options: Chordata, Arthropoda, Echinodermata, etc.
+CLADE="Chordata"
+
+# Reference Database
+# ==================
+
+# Path to custom seed database (optional)
+# Leave empty to use default GetOrganelle database
+CUSTOM_SEED_DB=""
+
+# Path to reference genome (optional)
+# Used for comparison and validation
+REFERENCE_GENOME=""
+
+# Quality Control
+# ===============
+
+# Minimum read quality for filtering (if using trimming)
+MIN_QUALITY=20
+
+# Minimum read length (if using trimming)
+MIN_LENGTH=50
+
+# Output Options
+# ==============
+
+# Save intermediate files
+KEEP_TEMP="false"
+
+# Verbosity level (0=quiet, 1=normal, 2=verbose)
+VERBOSE=1
+
+# Project Paths
+# =============
+
+# Base directory for input data
+DATA_DIR="data"
+
+# Directory for raw reads
+READS_DIR="${DATA_DIR}/raw_reads"
+
+# Directory for reference genomes
+REF_DIR="${DATA_DIR}/references"
+
+# Output directory
+OUTPUT_DIR="output"
+
+# Annotation directory
+ANNOTATION_DIR="annotations"
+
+# QC reports directory
+QC_DIR="qc_reports"
+
+# Notes
+# =====
+# - Edit this file to customize parameters for your project
+# - Copy this file and modify for different samples or species
+# - Parameters can be overridden via command-line arguments

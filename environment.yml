@@ -1,0 +1,21 @@
+name: getorganelle
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.7
+  - getorganelle
+  - spades
+  - bowtie2
+  - blast
+  - bandage
+  - fastqc
+  - seqkit
+  - biopython
+  - numpy
+  - scipy
+  - matplotlib
+  - pip
+  - pip:
+    - mitoz

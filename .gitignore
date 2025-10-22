@@ -1,0 +1,83 @@
+# GetOrganelle Project .gitignore
+
+# Data files
+data/raw_reads/*.fastq
+data/raw_reads/*.fastq.gz
+data/raw_reads/*.fq
+data/raw_reads/*.fq.gz
+
+# Output directories
+output/
+annotations/
+qc_reports/
+
+# Custom databases (can be regenerated)
+custom_database/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs
+*.log
+*.out
+*.err
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Assembly intermediate files
+filtered_spades/
+*.assembly_graph.fastg
+*.assembly_graph.fastg.extend*
+*.scaffolds.fasta
+*.contigs.fasta
+
+# Compressed files (excluding example data if any)
+*.tar.gz
+*.zip
+*.bz2
+
+# Keep directory structure but ignore contents
+!data/raw_reads/.gitkeep
+!data/references/.gitkeep
+!output/.gitkeep
+!annotations/.gitkeep
+!qc_reports/.gitkeep
