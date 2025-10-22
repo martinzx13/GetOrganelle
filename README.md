@@ -154,8 +154,6 @@ Complete workflow script (`scripts/assemble_mitochondria.sh`):
 
 ## 🐛 Troubleshooting Decision Tree
 
-## 🐛 Troubleshooting Decision Tree
-
 ```mermaid
 flowchart TD
     A[Run SPAdes Assembly] --> B{Did it finish successfully?}
