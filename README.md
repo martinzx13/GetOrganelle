@@ -26,6 +26,9 @@ This tutorial focuses on **mitochondrial DNA assembly** using fish genomic data 
 
 ## Prerequisites
 
+If you are running in a remote server, please make sure that you have at least the
+following facilities.
+
 - Python 3.7 or higher
 - At least 8GB RAM (16GB recommended)
 - 20GB free disk space
@@ -34,7 +37,23 @@ This tutorial focuses on **mitochondrial DNA assembly** using fish genomic data 
 
 ## Installation
 
-### Option 1: Using Conda (Recommended)
+### Option 1: Using the conda environment without any .Yml file.
+
+``` bash
+# Create a new Organelle with a specific python. env
+conda create -y -n organelles_1 python=3.9
+
+# Activate the environment.
+conda activate organelles_1
+
+# Install GetOrganelle
+conda install -c bioconda getorganelle
+
+# Download seed and label databases
+get_organelle_config.py --add embplant_pt,embplant_mt,animal_mt
+```
+
+### Option 2: Using Conda (Recommended) - Using the .yml file.
 
 ```bash
 # Create a new conda environment
@@ -45,10 +64,10 @@ conda activate getorganelle
 conda install -c bioconda getorganelle
 
 # Download seed and label databases
-get_organelle_config.py --add embplant_pt,embplant_mt,embplant_nr,animal_mt,fungus_mt
+get_organelle_config.py --add embplant_pt,embplant_mt,animal_mt
 ```
 
-### Option 2: Using pip
+### Option 3: Using pip
 
 ```bash
 # Install dependencies
