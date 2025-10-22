@@ -152,6 +152,36 @@ Complete workflow script (`scripts/assemble_mitochondria.sh`):
 
 ## Troubleshooting
 
+## 🐛 Troubleshooting Decision Tree
+
+```mermaid
+flowchart TD
+    A[Run SPAdes Assembly] --> B{Did it finish successfully?}
+
+    B -- Yes --> C[✅ Done! Proceed to annotation]
+
+    B -- No --> D{Error code -4?}
+
+    D -- Yes --> E[Check available RAM with free -h or htop]
+    E --> F{Enough memory?}
+
+    F -- No --> G[Request more memory / reduce k-mers]
+    G --> A
+
+    F -- Yes --> H[Check FASTQ integrity with FastQC / zcat]
+    H --> I{Files OK?}
+
+    I -- No --> J[Re-download or fix input files]
+    J --> A
+
+    I -- Yes --> K[Recreate Conda environment]
+    K --> L[conda remove -n organelles_1 --all]
+    L --> M[conda create -n organelles_1 python=3.9]
+    M --> N[conda install -c bioconda getorganelle]
+    N --> A
+
+    D -- No --> O[Check logs for other errors and adjust parameters]
+
 ### Common Issues
 
 **1. Assembly produces multiple contigs**
