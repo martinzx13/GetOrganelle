@@ -154,6 +154,8 @@ Complete workflow script (`scripts/assemble_mitochondria.sh`):
 
 ## 🐛 Troubleshooting Decision Tree
 
+## 🐛 Troubleshooting Decision Tree
+
 ```mermaid
 flowchart TD
     A[Run SPAdes Assembly] --> B{Did it finish successfully?}
@@ -175,13 +177,11 @@ flowchart TD
     J --> A
 
     I -- Yes --> K[Recreate Conda environment]
-    K --> L[conda remove -n organelles_1 --all]
-    L --> M[conda create -n organelles_1 python=3.9]
-    M --> N[conda install -c bioconda getorganelle]
-    N --> A
+    K --> L[Remove old env and recreate with Python 3.9 + GetOrganelle]
+    L --> A
 
     D -- No --> O[Check logs for other errors and adjust parameters]
-
+```
 ### Common Issues
 
 **1. Assembly produces multiple contigs**
