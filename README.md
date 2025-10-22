@@ -67,21 +67,6 @@ conda install -c bioconda getorganelle
 get_organelle_config.py --add embplant_pt,embplant_mt,animal_mt
 ```
 
-### Option 3: Using pip
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Install GetOrganelle from source
-git clone https://github.com/Kinggerm/GetOrganelle.git
-cd GetOrganelle
-python setup.py install
-
-# Download databases
-get_organelle_config.py --add animal_mt
-```
-
 ### Verify Installation
 
 ```bash
@@ -90,43 +75,13 @@ get_organelle_from_reads.py --version
 
 ## Database Setup
 
-### Mitofish Database
+### Mitofish Database (UP COMMING ...)
 
 Mitofish is a comprehensive database of fish mitochondrial genomes. To use it with GetOrganelle:
 
 1. **Download reference genomes from Mitofish:**
-
-```bash
-# Create a directory for reference data
-mkdir -p data/references
-
-# Download fish mitochondrial genomes from NCBI/Mitofish
-# Example: Download a reference genome (e.g., Zebrafish)
-wget -O data/references/zebrafish_mt.fasta \
-  "https://www.ncbi.nlm.nih.gov/nuccore/NC_002333.2?report=fasta"
-```
-
 2. **Prepare custom seed database (optional):**
-
-```bash
-# If you have species-specific references
-mkdir -p custom_database
-cp data/references/*.fasta custom_database/
-
-# Index the custom database
-cd custom_database
-makeblastdb -in zebrafish_mt.fasta -dbtype nucl -parse_seqids
-```
-
 ### Configure GetOrganelle for Animal Mitochondria
-
-```bash
-# Add animal mitochondrial database
-get_organelle_config.py --add animal_mt
-
-# Check configuration
-get_organelle_config.py --list
-```
 
 ## Genome Assembly
 
@@ -144,15 +99,21 @@ mkdir -p data/raw_reads
 ### Basic Assembly Command
 
 ```bash
+
+#create an output folder.
+
+mkdir output
+
 # Run GetOrganelle for mitochondrial genome assembly
 get_organelle_from_reads.py \
-  -1 data/raw_reads/sample_R1.fastq.gz \
-  -2 data/raw_reads/sample_R2.fastq.gz \
-  -o output/sample_mt \
-  -R 15 \
+  -1 data/raw_reads1/FRa3_R1.trimmed.fastq.gz \
+  -2 data/raw_reads1/FRa3_R2.trimmed.fastq.gz \
+  -R 10 \
   -k 21,45,65,85,105 \
   -F animal_mt \
-  -t 4
+  -t 8 \
+  -s ~/.GetOrganelle/SeedDatabase/SardinaMH329246.fasta \
+  -o "./output/mtDNA_sample_R"
 
 # Parameters:
 # -1, -2: Input paired-end reads
@@ -163,30 +124,12 @@ get_organelle_from_reads.py \
 # -t: Number of threads
 ```
 
-### Advanced Assembly Options
-
-For challenging assemblies:
-
-```bash
-# High-coverage data
-get_organelle_from_reads.py \
-  -1 data/raw_reads/sample_R1.fastq.gz \
-  -2 data/raw_reads/sample_R2.fastq.gz \
-  -o output/sample_mt_advanced \
-  -R 20 \
-  -k 21,45,65,85,105,115 \
-  -F animal_mt \
-  -t 8 \
-  --max-reads 1.5E7 \
-  --pre-grouped
-```
-
 ### Output Files
 
 After assembly, check the output directory:
 
 ```bash
-output/sample_mt/
+mtDNA_sample
 ├── animal_mt.K*.assembly_graph.fastg    # Assembly graph
 ├── animal_mt.K*.assembly_graph.fastg.extend_animal_mt-GenomeType_*.fasta  # Extended contigs
 ├── animal_mt.K*.path_sequence.fasta     # Final assembled sequence(s)
@@ -198,87 +141,14 @@ output/sample_mt/
 
 ### Using MitoZ for Annotation
 
-```bash
-# Install MitoZ (if not already installed)
-conda install -c bioconda mitoz
-
-# Run annotation
-mitoz annotate \
-  --fastafile output/sample_mt/animal_mt.K*.path_sequence.fasta \
-  --outprefix sample_mt_annotated \
-  --thread_number 4 \
-  --clade Chordata \
-  --genetic_code 2
-```
 
 ### Using MITOS
 
-```bash
-# Alternative annotation tool
-# Install MITOS from https://mitos2.bioinf.uni-leipzig.de/
-
-# Run MITOS annotation
-mitos2 -i output/sample_mt/animal_mt.K*.path_sequence.fasta \
-  -o output/annotations/mitos \
-  -r refseq81m \
-  -c 2
-```
-
 ### Visualization
 
-```bash
-# Install Bandage for graph visualization
-conda install -c bioconda bandage
-
-# Visualize assembly graph
-Bandage image output/sample_mt/animal_mt.K*.assembly_graph.fastg \
-  output/sample_mt/assembly_graph.png
-```
-
-## Example Workflow
+## Example Workflow (Up Comming)
 
 Complete workflow script (`scripts/assemble_mitochondria.sh`):
-
-```bash
-#!/bin/bash
-# Complete mitochondrial genome assembly workflow
-
-SAMPLE_NAME=$1
-READ1=$2
-READ2=$3
-THREADS=${4:-4}
-
-# Step 1: Quality check (optional)
-echo "Running quality check..."
-fastqc $READ1 $READ2 -t $THREADS -o qc_reports/
-
-# Step 2: Assemble mitochondrial genome
-echo "Assembling mitochondrial genome..."
-get_organelle_from_reads.py \
-  -1 $READ1 \
-  -2 $READ2 \
-  -o output/${SAMPLE_NAME}_mt \
-  -R 15 \
-  -k 21,45,65,85,105 \
-  -F animal_mt \
-  -t $THREADS
-
-# Step 3: Annotate
-echo "Annotating mitochondrial genome..."
-mitoz annotate \
-  --fastafile output/${SAMPLE_NAME}_mt/*.path_sequence.fasta \
-  --outprefix ${SAMPLE_NAME}_annotated \
-  --thread_number $THREADS \
-  --clade Chordata \
-  --genetic_code 2
-
-echo "Workflow complete!"
-```
-
-Usage:
-```bash
-bash scripts/assemble_mitochondria.sh zebrafish data/raw_reads/zf_R1.fq.gz data/raw_reads/zf_R2.fq.gz 8
-```
 
 ## Troubleshooting
 
