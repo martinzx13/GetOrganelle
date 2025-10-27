@@ -141,7 +141,6 @@ mtDNA_sample
 
 ### Using MitoZ for Annotation
 
-
 ### Using MITOS
 
 ### Visualization

@@ -2,9 +2,10 @@ name: getorganelle
 channels:
   - bioconda
   - conda-forge
+  - defaults
 dependencies:
-  - python>=3.7
-  - getorganelle
-  - spades
-  - bowtie2
-  - blast
+  - python=3.8
+  - getorganelle=1.7.7.0
+  - spades=3.15.5
+  - bowtie2=2.5.1
+  - blast=2.13.0
